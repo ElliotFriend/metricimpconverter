@@ -2,25 +2,43 @@ function ConvertHandler() {
 
   // TODO: Complete the necessary conversion logic in
   // `/controllers/convertHandler.js`
+  // const re = /^(?<numerator>[\d\.]+)?(?<slash>\/)?(?<denominator>[\d\.]+)?(?<unit>[a-z]+)?$/i
+  const re = /^(?<number>[\d\.\/]+)?(?<unit>[a-z]+)?$/i
 
   this.getNum = function(input) {
-    let re = /^(?<numerator>[\d\.{1}]+)(?<slash>\/)?(?<denominator>[\d\.{1}]+)?/
+    // let re = /^(?<numerator>[\d\.{1}]+)(?<slash>\/)?(?<denominator>[\d\.{1}]+)?/
     let match = input.match(re)
-    console.log(match)
-    if (match) {
-      let numerator = parseFloat(match.groups.numerator)
-      let denominator = parseFloat(match.groups.denominator) || 1
-      if ((match.groups.slash && !match.groups.denominator)
-        || !match.groups.slash && match.groups.denominator) {
-        console.log('invalid number')
+    if (match.groups.number) {
+      let numString = match.groups.number
+      let [ num, den, rest ] = numString.split('/')
+      if (rest) {
         return null
+      } else if (den) {
+        num = Number(num)
+        den = Number(den)
+        return num / den || null
       } else {
-        return numerator / denominator
+        return Number(num) || null
       }
     } else {
-      console.log('invalid number')
-      return null
+      console.log("return 1")
+      return 1
     }
+    console.log(match)
+    // if (match) {
+    //   let m = match.groups
+    //   if ((m.slash && !m.denominator) || !m.slash && m.denominator) {
+    //     console.log('invalid number')
+    //     return null
+    //   } else {
+    //     let num = parseFloat(m.numerator) || 1
+    //     let den = parseFloat(m.denominator) || 1
+    //     return num / den
+    //   }
+    // } else {
+    //   console.log('invalid number')
+    //   return null
+    // }
   };
 
   this.getUnit = function(input) {
