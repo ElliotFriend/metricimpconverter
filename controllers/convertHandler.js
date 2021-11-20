@@ -5,6 +5,7 @@ function ConvertHandler() {
   const re = /^(?<number>[\d\.\/]+)?(?<unit>[a-z]+)?$/i
 
   this.getNum = (input) => {
+    if (!input) { return 1 }
     let match = input.match(re)
     if (match.groups.number) {
       let numString = match.groups.number
@@ -30,6 +31,8 @@ function ConvertHandler() {
       let unitString = match.groups.unit.toLowerCase()
       if (units.includes(unitString)) {
         return unitString === 'l' ? 'L' : unitString
+      } else {
+        return null
       }
     } else {
       return null
