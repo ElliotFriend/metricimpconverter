@@ -8,35 +8,30 @@ suite('Unit Tests', function() {
   suite('Reading Numbers', function() {
     test('convertHandler should correctly read a whole number input.', function() {
       assert.isOk(convertHandler.getNum('69'), 'getUnit return is OK with a whole number')
-      // assert.isDefined(convertHandler.getNum('69'), 'getUnit return is defined with a whole number')
       assert.isNotNull(convertHandler.getNum('69'), 'getUnit return is not null with a whole number')
       assert.typeOf(convertHandler.getNum('69'), 'number', 'getUnit return is typeof number with a whole number')
     })
 
     test('convertHandler should correctly read a decimal number input.', function() {
       assert.isOk(convertHandler.getNum('69.69'), 'getUnit return is OK with a decimal number')
-      // assert.isDefined(convertHandler.getNum('69.69'), 'getUnit return is defined with a decimal number')
       assert.isNotNull(convertHandler.getNum('69.69'), 'getUnit return is not null with a decimal number')
       assert.typeOf(convertHandler.getNum('69.69'), 'number', 'getUnit return is typeof number with a decimal number')
     })
 
     test('convertHandler should correctly read a fractional input.', function() {
       assert.isOk(convertHandler.getNum('69/13'), 'getUnit return is OK with fractional input')
-      // assert.isDefined(convertHandler.getNum('69/13'), 'getUnit return is defined with fractional input')
       assert.isNotNull(convertHandler.getNum('69/13'), 'getUnit return is not null with fractional input')
       assert.typeOf(convertHandler.getNum('69/13'), 'number', 'getUnit return is typeof number with fractional input')
     })
 
     test('convertHandler should correctly read a fractional input with a decimal.', function() {
       assert.isOk(convertHandler.getNum('69.69/13.13'), 'getUnit return is OK with fractional input with a decimal number')
-      // assert.isDefined(convertHandler.getNum('69.69/13.13'), 'getUnit return is defined with fractional input with a decimal number')
       assert.isNotNull(convertHandler.getNum('69.69/13.13'), 'getUnit return is not null with fractional input with a decimal number')
       assert.typeOf(convertHandler.getNum('69.69/13.13'), 'number', 'getUnit return is typeof number with fractional input with a decimal number')
     })
 
     test('convertHandler should correctly return an error on a double-fraction.', function() {
       assert.isNotOk(convertHandler.getNum('625/25/5'), 'getUnit return is not OK on a double-fraction.')
-      // assert.isUndefined(convertHandler.getNum('625/25/5'), 'getUnit return is undefined on a double-fraction.')
       assert.isNull(convertHandler.getNum('625/25/5'), 'getUnit return is null on a double-fraction.')
       assert.notTypeOf(convertHandler.getNum('625/25/5'), 'number', 'getUnit return is not typeof number on a double-fraction.')
     })
@@ -96,19 +91,37 @@ suite('Unit Tests', function() {
 
   })
 
-  // suite('Conversion Calculations', function() {
-  //   // convertHandler should correctly convert gal to L.
-  //
-  //   // convertHandler should correctly convert L to gal.
-  //
-  //   // convertHandler should correctly convert mi to km.
-  //
-  //   // convertHandler should correctly convert km to mi.
-  //
-  //   // convertHandler should correctly convert lbs to kg.
-  //
-  //   // convertHandler should correctly convert kg to lbs.
-  //
-  // })
+  suite('Conversion Calculations', function() {
+    test('convertHandler should correctly convert gal to L.', function() {
+      assert.strictEqual(convertHandler.convert(1, 'gal'), 3.78541, '1 gal converts to 3.78541 L')
+      assert.strictEqual(convertHandler.convert(10, 'gal'), 37.8541, '10 gal converts to 37.8541 L')
+    })
+
+    test('convertHandler should correctly convert L to gal.', function() {
+      assert.strictEqual(convertHandler.convert(1, 'L'), 0.26417, '1 L converts to 0.26417 gal')
+      assert.strictEqual(convertHandler.convert(10, 'L'), 2.64172, '10 L converts to 2.64172 gal')
+    })
+
+    test('convertHandler should correctly convert mi to km.', function() {
+      assert.strictEqual(convertHandler.convert(1, 'mi'), 1.60934, '1 mi converts to 1.60934 km')
+      assert.strictEqual(convertHandler.convert(10, 'mi'), 16.0934, '10 mi converts to 16.0934 km')
+    })
+
+    test('convertHandler should correctly convert km to mi.', function() {
+      assert.strictEqual(convertHandler.convert(1, 'km'), 0.62137, '1 km converts to 0.62137 mi')
+      assert.strictEqual(convertHandler.convert(10, 'km'), 6.21373, '10 km converts to 6.21373 mi')
+    })
+
+    test('convertHandler should correctly convert lbs to kg.', function() {
+      assert.strictEqual(convertHandler.convert(1, 'lbs'), 0.45359, '1 lbs converts to 0.45359 kg')
+      assert.strictEqual(convertHandler.convert(10, 'lbs'), 4.53592, '10 lbs converts to 4.53592 kg')
+    })
+
+    test('convertHandler should correctly convert kg to lbs.', function() {
+      assert.strictEqual(convertHandler.convert(1, 'kg'), 2.20462, '1 kg converts to 2.20462 lbs')
+      assert.strictEqual(convertHandler.convert(10, 'kg'), 22.04624, '10 kg converts to 22.04624 lbs')
+    })
+
+  })
 
 });
