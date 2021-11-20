@@ -4,8 +4,9 @@ function ConvertHandler() {
   // `/controllers/convertHandler.js`
 
   this.getNum = function(input) {
-    let re = /^(?<numerator>\d+\.?\d*)(?<slash>\/)?(?<denominator>\d+\.?\d*)?[a-z]/i
+    let re = /^(?<numerator>[\d\.{1}]+)(?<slash>\/)?(?<denominator>[\d\.{1}]+)?/
     let match = input.match(re)
+    console.log(match)
     if (match) {
       let numerator = parseFloat(match.groups.numerator)
       let denominator = parseFloat(match.groups.denominator) || 1
@@ -76,17 +77,17 @@ function ConvertHandler() {
 
     switch (initUnit) {
       case 'gal':
-        return initNum * galToL
+        return (initNum * galToL).toFixed(5)
       case 'L':
-        return initNum / galToL
+        return (initNum / galToL).toFixed(5)
       case 'lbs':
-        return initNum * lbsToKg
+        return (initNum * lbsToKg).toFixed(5)
       case 'kg':
-        return initNum / lbsToKg
+        return (initNum / lbsToKg).toFixed(5)
       case 'mi':
-        return initNum * miToKm
+        return (initNum * miToKm).toFixed(5)
       case 'km':
-        return initNum / miToKm
+        return (initNum / miToKm).toFixed(5)
     }
   };
 
