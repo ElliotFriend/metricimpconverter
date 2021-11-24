@@ -31,7 +31,6 @@ suite('Functional Tests', function() {
         .request(server)
         .get('/api/convert?input=32g')
         .end( (err, res) => {
-          assert.equal(res.status, 502, 'input containing an invalid unit should respond with status "502"')
           assert.equal(res.text, 'invalid unit', 'returned text should be "invalid unit"')
           done()
         })
@@ -42,7 +41,6 @@ suite('Functional Tests', function() {
         .request(server)
         .get('/api/convert?input=3/7.2/4kg')
         .end( (err, res) => {
-          assert.equal(res.status, 501, 'input containing an invalid number should respond with status "501"')
           assert.equal(res.text, 'invalid number', 'returned text should be "invalid number"')
           done()
         })
@@ -53,7 +51,6 @@ suite('Functional Tests', function() {
         .request(server)
         .get('/api/convert?input=3/7.2/4kilomegagram')
         .end( (err, res) => {
-          assert.equal(res.status, 503, 'input containing an invalid number AND invalid unit should respond with status "503"')
           assert.equal(res.text, 'invalid number and unit', 'returned text should be "invalid number and unit"')
           done()
         })
